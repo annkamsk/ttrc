@@ -2,7 +2,7 @@
 
 TTRC is a script for reporting [Trusted Types](https://github.com/w3c/webappsec-trusted-types) violations discovered at runtime. It produces a list of source TypeScript files with location of violation. 
 
-It assumes that the tested application is already running with a defined default policy for Trusted Types violations, so before running TTRC put the following code into the HTML files of documents you want to check:
+It assumes that the tested application is already running with a defined default policy for Trusted Types violations and created source maps, so before running TTRC put the following code into the HTML files of documents you want to check:
 
 ```html
 <meta http-equiv="Content-Security-Policy" content="require-trusted-types-for 'script';"/>
@@ -19,8 +19,17 @@ It assumes that the tested application is already running with a defined default
     });
 </script>
 ```
+Then make sure that during the compilation the source maps are produced:
+`tsconfig.json`:
+```js
+{
+    "compilerOptions": {
+            "sourceMap": true
+    }
+}
+```
 
-Then build and run your application as usual.
+Build and run your application as usual.
 
 ## Build and Run
 
